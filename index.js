@@ -1,3 +1,4 @@
+const { token } = require('./config.json');
 const { MessageEmbed } =require('discord.js');
 const ytdl = require("ytdl-core");
 const Discord = require("discord.js");
@@ -14,12 +15,22 @@ const prefix = 'j!';
 
 //Token pour connecter le bot discord :
 
-Client.login("OTQwNTQxMjU5NjU3OTMyODIx.Gc96XU.YgCi5qp35Uci9qrP2CUWnbp5_4q19CfU9wIQlc");
+Client.login(token);
 
 //Envoie un message a la console :
 
 Client.on("ready", () => {
     console.log("✅ | Le bot a démarrer avec succés !");
+});
+
+//Status Personnalisé :
+Client.on("ready", () => {
+    function randomStatus() {
+        let status = ["Utilise j!help pour savoir comment m'utiliser", "J'ai étais crée par Jdog220", "Pourquoi tu lis sa ?"]
+        let rstatus = Math.floor(Math.random() * status.length);
+
+        Client.user.setActivity(status[rstatus], {type: "WATCHING", url: "https://discord.com/api/oauth2/authorize?client_id=940541259657932821&permissions=8&scope=bot"});
+    }; setInterval(randomStatus, 2000)
 });
 
 //Essentiels pour les commandes :
